@@ -9,7 +9,7 @@
   "NFT_NAME": "Stand With Ukraine.",
   "SYMBOL": "SWU",
   "MAX_SUPPLY": 128,
-  "WEI_COST": 0,
+  "WEI_COST": 1000000000000000000,
   "DISPLAY_COST": 0,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",

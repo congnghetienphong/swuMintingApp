@@ -102,6 +102,7 @@ function App() {
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
+  const [priceAmount, setPriceAmount] = useState(0);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -113,7 +114,7 @@ function App() {
     NFT_NAME: "",
     SYMBOL: "",
     MAX_SUPPLY: 1,
-    WEI_COST: 0,
+    WEI_COST: 1000000000000000000,
     DISPLAY_COST: 0,
     GAS_LIMIT: 0,
     MARKETPLACE: "",
@@ -122,7 +123,7 @@ function App() {
   });
 
   const claimNFTs = () => {
-    let cost = CONFIG.WEI_COST;
+    let cost = CONFIG.WEI_COST * priceAmount ;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -151,6 +152,22 @@ function App() {
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
       });
+  };
+
+  const decrementPriceAmount = () => {
+    let newMintAmount = priceAmount - 1;
+    if (newMintAmount < 1) {
+      newMintAmount = 1;
+    }
+    setPriceAmount(newMintAmount);
+  };
+
+  const incrementPriceAmount = () => {
+    let newMintAmount = priceAmount + 1;
+    if (newMintAmount > 50) {
+      newMintAmount = 50;
+    }
+    setPriceAmount(newMintAmount);
   };
 
   const decrementMintAmount = () => {
@@ -292,10 +309,49 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
+                  1 {CONFIG.SYMBOL} costs {priceAmount}{" "}
                   {CONFIG.NETWORK.SYMBOL}.
                 </s.TextTitle>
+                <s.TextDescription
+                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                >
+                  It is FREE but you can buy me a coffee.
+                </s.TextDescription>
                 <s.SpacerXSmall />
+                <s.SpacerMedium />
+                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                      <StyledRoundButton
+                        style={{ lineHeight: 0.4 }}
+                        disabled={claimingNft ? 1 : 0}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          decrementPriceAmount();
+                        }}
+                      >
+                        -
+                      </StyledRoundButton>
+                      <s.SpacerMedium />
+                      <s.TextDescription
+                        style={{
+                          textAlign: "center",
+                          color: "var(--accent-text)",
+                        }}
+                      >
+                        {priceAmount}
+                      </s.TextDescription>
+                      <s.SpacerMedium />
+                      <StyledRoundButton
+                        disabled={claimingNft ? 1 : 0}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          incrementPriceAmount();
+                        }}
+                      >
+                        +
+                      </StyledRoundButton>
+                    </s.Container>
+                    <s.SpacerSmall />
+
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
