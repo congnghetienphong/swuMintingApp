@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0xA19d3125FEbC39D8BA509B0A6D4f2393E1F4EA34",
+  "SCAN_LINK": "https://polygonscan.com/token/0xA19d3125FEbC39D8BA509B0A6D4f2393E1F4EA34",
+  "NETWORK": {
+    "NAME": "Polygon",
+    "SYMBOL": "Matic",
+    "ID": 137
+  },
+  "NFT_NAME": "Stand With Ukraine.",
+  "SYMBOL": "SWU",
+  "MAX_SUPPLY": 128,
+  "WEI_COST": 0,
+  "DISPLAY_COST": 0,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/stand-with-ukraine-vn",
+  "SHOW_BACKGROUND": true
+}
