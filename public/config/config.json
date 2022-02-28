@@ -8,7 +8,7 @@
   },
   "NFT_NAME": "Helmet & Brain",
   "SYMBOL": "SWU",
-  "MAX_SUPPLY": 128,
+  "MAX_SUPPLY": 1000,
   "WEI_COST": 1000000000000000000,
   "DISPLAY_COST": 0,
   "GAS_LIMIT": 285000,
