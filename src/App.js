@@ -116,7 +116,7 @@ function App() {
     MAX_SUPPLY: 1,
     WEI_COST: 1000000000000000000,
     DISPLAY_COST: 0,
-    GAS_LIMIT: 0,
+    GAS_LIMIT: 500000,
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
@@ -134,7 +134,7 @@ function App() {
     blockchain.smartContract.methods
       .mint(blockchain.account, mintAmount)
       .send({
-        //gasLimit: String(totalGasLimit),
+        gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
         from: blockchain.account,
         value: totalCostWei,
