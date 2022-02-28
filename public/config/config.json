@@ -1,18 +1,18 @@
 {
-  "CONTRACT_ADDRESS": "0xA19d3125FEbC39D8BA509B0A6D4f2393E1F4EA34",
-  "SCAN_LINK": "https://polygonscan.com/token/0xA19d3125FEbC39D8BA509B0A6D4f2393E1F4EA34",
+  "CONTRACT_ADDRESS": "0x291A5166ae4F8490f4B9792B43B2e887e43885DE",
+  "SCAN_LINK": "https://polygonscan.com/token/0x291A5166ae4F8490f4B9792B43B2e887e43885DE",
   "NETWORK": {
     "NAME": "Polygon",
     "SYMBOL": "Matic",
     "ID": 137
   },
-  "NFT_NAME": "Stand With Ukraine.",
+  "NFT_NAME": "Helmet & Brain",
   "SYMBOL": "SWU",
   "MAX_SUPPLY": 128,
   "WEI_COST": 1000000000000000000,
   "DISPLAY_COST": 0,
   "GAS_LIMIT": 285000,
-  "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/stand-with-ukraine-vn",
+  "MARKETPLACE": "OpenSea.io",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/helmet-brain",
   "SHOW_BACKGROUND": true
 }
