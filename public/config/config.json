@@ -1,0 +1,18 @@
+{
+  "CONTRACT_ADDRESS": "0x0C6d10acf00361F864bA5E40475488189f67B8ED",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x0C6d10acf00361F864bA5E40475488189f67B8ED",
+  "NETWORK": {
+    "NAME": "Polygon",
+    "SYMBOL": "MATIC",
+    "ID": 137
+  },
+  "NFT_NAME": "I STAND WITH UKRAINE.",
+  "SYMBOL": "ISWU",
+  "MAX_SUPPLY": 5984,
+  "WEI_COST": 1000000000000000000,
+  "DISPLAY_COST": 0,
+  "GAS_LIMIT": 3000000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/i-stand-with-ukraine-m1jgrmiyop",
+  "SHOW_BACKGROUND": true
+}
