@@ -372,7 +372,7 @@ function App() {
                           color: "var(--accent-text)",
                         }}
                       >
-                        { idFrom }
+                        { idFrom + parseInt(data.totalSupply) }
                       </s.TextDescription>
                       <s.SpacerMedium />
                       <StyledRoundButton
