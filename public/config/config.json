@@ -1,10 +1,10 @@
 {
-  "CONTRACT_ADDRESS": "0xcb9d3Bd74576F0fF35fa7bF6b2691653e59B6527",
-  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xcb9d3Bd74576F0fF35fa7bF6b2691653e59B6527",
+  "CONTRACT_ADDRESS": "0x2e624eF51497B8eB5981Aa7f4A3609058f188C35",
+  "SCAN_LINK": "https://polygonscan.com/address/0x2e624ef51497b8eb5981aa7f4a3609058f188c35",
   "NETWORK": {
-    "NAME": "Rinkeby",
-    "SYMBOL": "ETH",
-    "ID": 4
+    "NAME": "Matic Main",
+    "SYMBOL": "MATIC",
+    "ID": 137
   },
   "NFT_NAME": "I STAND WITH UKRAINE.",
   "SYMBOL": "ISWU",
