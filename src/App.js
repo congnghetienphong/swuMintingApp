@@ -372,7 +372,7 @@ function App() {
                           color: "var(--accent-text)",
                         }}
                       >
-                        {idFrom + data.totalSupply }
+                        { idFrom }
                       </s.TextDescription>
                       <s.SpacerMedium />
                       <StyledRoundButton
