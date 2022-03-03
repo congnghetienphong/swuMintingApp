@@ -1,4 +1,5 @@
 // log
+import { getTokenIds } from "../../helpers";
 import store from "../store";
 
 const fetchDataRequest = () => {
@@ -11,6 +12,7 @@ const fetchDataSuccess = (payload) => {
   return {
     type: "CHECK_DATA_SUCCESS",
     payload: payload,
+    // payload: idsNotMinted,
   };
 };
 
@@ -33,11 +35,25 @@ export const fetchData = () => {
       //   .getState()
       //   .blockchain.smartContract.methods.cost()
       //   .call();
-
+     let ids = getTokenIds(1,5984);
+     //console.log(ids);
+    //  let idNotMinted = await store
+    //  .getState().blockchain.smartContract.methods.checkAllMinted(ids).call();
+      // .then(
+      //   (receipt) => {
+      //       // xoa id 0
+      //       //idNotMinted = receipt;
+      //       console.log(receipt);
+      //       idNotMinted1 = receipt.filter(function(v) {
+      //         return v != '0';
+      //       });
+      //     re;
+      //     });
+      
       dispatch(
         fetchDataSuccess({
           totalSupply,
-          
+          // idNotMinted,
           // cost,
         })
       );

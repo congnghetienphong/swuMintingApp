@@ -4,6 +4,7 @@ const initialState = {
   cost: 0,
   error: false,
   errorMsg: "",
+  idNotMinted: new Array(),
 };
 
 const dataReducer = (state = initialState, action) => {
@@ -23,6 +24,7 @@ const dataReducer = (state = initialState, action) => {
         // cost: action.payload.cost,
         error: false,
         errorMsg: "",
+        // idNotMinted : action.payload.idNotMinted,
       };
     case "CHECK_DATA_FAILED":
       return {

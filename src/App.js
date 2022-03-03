@@ -95,6 +95,7 @@ export const StyledLink = styled.a`
 `;
 
 function App() {
+  
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -121,7 +122,6 @@ function App() {
     MARKETPLACE_LINK: "",
     SHOW_BACKGROUND: false,
   });
-
   const claimNFTs = (idFrom, numberMint) => {
     let cost = CONFIG.WEI_COST * priceAmount;
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -247,21 +247,59 @@ function App() {
     if (newMintAmount < 1) {
       newMintAmount = 1;
     }
-    setIdFrom(newMintAmount);
-    var dongdan ='https://opensea.mypinata.cloud/ipfs/QmRuSYRfFhEgq62WxPRM3RdA2Ds3zpeNEKotdLh7w2XW3T/' + newMintAmount + '.png';
-    document.getElementById("hinhdong").src = dongdan;
+    getIdsNotMinted().then( 
+      (idsNotMint) => {
+        //console.log(idsNotMint);
+        setIdFrom(pickIdNotMintDes(idsNotMint,newMintAmount));
+        setImagePath(newMintAmount);
+    }
+  );
   };
 
   const incrementIdFrom = () => {
     let newMintAmount = idFrom + 1;
-    // if (newMintAmount > 50) {
-    //   newMintAmount = 50;
-    // }
-    setIdFrom(newMintAmount);
-    var dongdan ='https://opensea.mypinata.cloud/ipfs/QmRuSYRfFhEgq62WxPRM3RdA2Ds3zpeNEKotdLh7w2XW3T/' + newMintAmount + '.png';
-    document.getElementById("hinhdong").src = dongdan;
+    getIdsNotMinted().then( 
+        (idsNotMint) => {
+          //console.log(idsNotMint);
+          setIdFrom(pickIdNotMintInc(idsNotMint,newMintAmount));
+          setImagePath(newMintAmount);
+      }
+    );
   };
-  // ke thuc dung cho id
+
+  const setImagePath = (idMint) => {
+    var dongdan ='https://opensea.mypinata.cloud/ipfs/QmRuSYRfFhEgq62WxPRM3RdA2Ds3zpeNEKotdLh7w2XW3T/' + idMint + '.png';
+    document.getElementById("hinhdong").src = dongdan;
+  }
+  // ke thuc dung cho id - end
+ // cac ham de quy kiem tra - start
+
+ const pickIdNotMintInc = (ids,idChecked) => {
+   
+  if(ids.indexOf(String(idChecked)) !== -1 || idChecked >=5984 ){
+    //alert("Value exists!")
+    return idChecked;
+  } else{
+      //alert("Value does not exists!")
+      idChecked ++;
+    return  pickIdNotMintInc(ids,idChecked);
+  }
+}
+
+
+const pickIdNotMintDes = (ids,idChecked) => {
+   
+  if(ids.indexOf(String(idChecked)) !== -1 || idChecked <=0 ){
+    //alert("Value exists!")
+    return idChecked < 0 ? 0 : idChecked;
+  } else{
+      //alert("Value does not exists!")
+      idChecked --;
+    return  pickIdNotMintDes(ids,idChecked);
+  }
+}
+
+ // cac ham de quy kiem tra - end
 
   // dung cho amounts - start
   const incrementPriceAmount = () => {
@@ -301,6 +339,24 @@ function App() {
       dispatch(fetchData(blockchain.account));
     }
   };
+const getIdsNotMinted = () => {
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      let ids = getTokenIds(1,5984);
+      var idsReturn;
+      //console.log(ids);
+
+      return ( blockchain.smartContract.methods.checkAllMinted(ids).call()
+      .then(
+        (receipt) => {
+            // xoa id 0
+            //console.log(receipt);
+            return receipt.filter(function(v) {
+              return v != '0';
+            }); 
+          }
+          ))
+    }
+  };
 
   const getConfig = async () => {
     const configResponse = await fetch("/config/config.json", {
@@ -333,7 +389,7 @@ function App() {
         <s.Container flex={1} jc={"center"} ai={"center"}
           >
             <StyledImg id="hinhdong"  style={{ backgroundColor: "var(--accent-text)" }}  alt={"example"}
-            src={'https://opensea.mypinata.cloud/ipfs/QmRuSYRfFhEgq62WxPRM3RdA2Ds3zpeNEKotdLh7w2XW3T/1.png'} />
+            src={'/config/images/bg.png'} />
           </s.Container>
         </a>
         <s.SpacerSmall />
@@ -372,7 +428,7 @@ function App() {
                           color: "var(--accent-text)",
                         }}
                       >
-                        { idFrom + parseInt(data.totalSupply) }
+                        { idFrom }
                       </s.TextDescription>
                       <s.SpacerMedium />
                       <StyledRoundButton
@@ -518,7 +574,6 @@ function App() {
                       onClick={(e) => {
                         e.preventDefault();
                         dispatch(connect());
-                        getData();
                       }}
                     >
                       CONNECT
