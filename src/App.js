@@ -363,7 +363,7 @@ function App() {
                           decrementIdfrom();
                         }}
                       >
-                        -
+                        {"<="}
                       </StyledRoundButton>
                       <s.SpacerMedium />
                       <s.TextDescription
@@ -382,7 +382,7 @@ function App() {
                           incrementIdFrom();
                         }}
                       >
-                        +
+                         {"=>"}
                       </StyledRoundButton>
                     </s.Container>
             <s.TextTitle
