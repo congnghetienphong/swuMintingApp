@@ -89,10 +89,45 @@ export const StyledImg = styled.img`
   transition: width 0.5s;
 `;
 
+export const StyledImgLogo = styled.img`
+  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
+  border: 4px dashed var(--secondary);
+  background-color: var(--accent);
+  border-radius: 10%;
+  width: 200px;
+  @media (min-width: 900px) {
+    width: 250px;
+  }
+  @media (min-width: 1000px) {
+    width: 300px;
+  }
+  transition: width 0.5s;
+`;
+
 export const StyledLink = styled.a`
   color: var(--secondary);
   text-decoration: none;
 `;
+
+// // Truong Ly
+export const Input = styled.input.attrs(props => ({
+  // we can define static props
+  type: "text",
+
+  // or we can define dynamic ones
+  size: props.size || "1em",
+}))`
+  color: palevioletred;
+  font-size: 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+
+  /* here we use the dynamically computed prop */
+  margin: ${props => props.size};
+  padding: ${props => props.size};
+`;
+
+
 
 function App() {
   
@@ -251,6 +286,7 @@ function App() {
       (idsNotMint) => {
         //console.log(idsNotMint);
         setIdFrom(pickIdNotMintDes(idsNotMint,newMintAmount));
+        displayIdNtf(newMintAmount);
         setImagePath(newMintAmount);
     }
   );
@@ -262,11 +298,19 @@ function App() {
         (idsNotMint) => {
           //console.log(idsNotMint);
           setIdFrom(pickIdNotMintInc(idsNotMint,newMintAmount));
+          displayIdNtf(newMintAmount);
           setImagePath(newMintAmount);
       }
     );
   };
-
+  function myFunction(val) {
+    alert("The input value has changed. The new value is: " + val);
+  }
+  const changeID = (idFromInput) => {
+    //console.log(idFromInput);
+    setIdFrom(idFromInput);
+    setImagePath(idFromInput);
+  }
   const setImagePath = (idMint) => {
     var dongdan ='https://opensea.mypinata.cloud/ipfs/QmRuSYRfFhEgq62WxPRM3RdA2Ds3zpeNEKotdLh7w2XW3T/' + idMint + '.png';
     document.getElementById("hinhdong").src = dongdan;
@@ -299,6 +343,9 @@ const pickIdNotMintDes = (ids,idChecked) => {
   }
 }
 
+function displayIdNtf(idFrom) {
+  document.getElementById("txtInputData").value =  idFrom ;
+}
  // cac ham de quy kiem tra - end
 
   // dung cho amounts - start
@@ -388,7 +435,7 @@ const getIdsNotMinted = () => {
         <a href={CONFIG.MARKETPLACE_LINK}>
         <s.Container flex={1} jc={"center"} ai={"center"}
           >
-            <StyledImg id="hinhdong"  style={{ backgroundColor: "var(--accent-text)" }}  alt={"example"}
+            <StyledImgLogo id="hinhdong"   alt={"example"}
             src={'/config/images/bg.png'} />
           </s.Container>
         </a>
@@ -413,7 +460,7 @@ const getIdsNotMinted = () => {
              <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       <StyledRoundButton
                         style={{ lineHeight: 0.4 }}
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={blockchain.account === null ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
                           decrementIdfrom();
@@ -428,11 +475,22 @@ const getIdsNotMinted = () => {
                           color: "var(--accent-text)",
                         }}
                       >
-                        { idFrom }
+                      {/* <Input  placeholder="Pick your NTF number." 
+                        onchange="myFunction(this.value)"
+                      >
+                      </Input> */}
+                      <Input type="text" placeholder="Pick NTF" id="txtInputData" 
+                      
+                      onChange={(e) => {
+                          changeID(Number(e.target.value)== 0 ? 1 : Number(e.target.value));
+                          //console.log(blockchain.account);
+                      }}
+                      />
+
                       </s.TextDescription>
                       <s.SpacerMedium />
                       <StyledRoundButton
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={blockchain.account === null ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
                           incrementIdFrom();
@@ -570,10 +628,11 @@ const getIdsNotMinted = () => {
                       Connect to the {CONFIG.NETWORK.NAME} network
                     </s.TextDescription>
                     <s.SpacerSmall />
-                    <StyledButton
+                    <StyledButton id="connectButton"
                       onClick={(e) => {
                         e.preventDefault();
                         dispatch(connect());
+                        
                       }}
                     >
                       CONNECT
