@@ -129,8 +129,8 @@ export const Input = styled.input.attrs(props => ({
 
 
 
-function App() {
-  
+function App({propFunction}) {
+
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -432,8 +432,14 @@ const getIdsNotMinted = () => {
         style={{ padding: 24, backgroundColor: "var(--primary)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
-        <a href={CONFIG.MARKETPLACE_LINK}>
-        <s.Container flex={1} jc={"center"} ai={"center"}
+        <a 
+        onClick={(e) => { 
+          if( e.target.id == "hinhdong" ){
+            propFunction(false);
+          }
+        }}
+        >
+        <s.Container  flex={1} jc={"center"} ai={"center"}
           >
             <StyledImgLogo id="hinhdong"   alt={"example"}
             src={'/config/images/bg.png'} />
@@ -475,11 +481,7 @@ const getIdsNotMinted = () => {
                           color: "var(--accent-text)",
                         }}
                       >
-                      {/* <Input  placeholder="Pick your NTF number." 
-                        onchange="myFunction(this.value)"
-                      >
-                      </Input> */}
-                      <Input type="text" placeholder="Pick NTF" id="txtInputData" 
+                      <Input placeholder="Pick NTF" id="txtInputData" 
                       
                       onChange={(e) => {
                           changeID(Number(e.target.value)== 0 ? 1 : Number(e.target.value));

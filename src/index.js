@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import Galary from "./viewPic";
+import MainApp from "./switchComponet";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -8,7 +10,7 @@ import "./styles/reset.css";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MainApp />
   </Provider>,
   document.getElementById("root")
 );
